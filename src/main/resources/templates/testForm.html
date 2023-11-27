@@ -1,0 +1,78 @@
+<!DOCTYPE html> 
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>User Form</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            padding: 20px;
+            background-image:url('./images/testim.jpg') ;
+        }
+        .form-container {
+            max-width: 600px;
+            margin: auto;
+        }
+    </style>
+</head>
+<body>
+	<div class="container form-container">
+    <h2 class="mb-4">Diagonistics Test Order Form</h2>
+    <!--<div th:if="${successMessage}" class="alert alert-success success-message">
+    <p th:text="${successMessage}"></p>
+	</div> -->
+    <form th:action="@{/save}" th:object="${test}" method="post" enctype="multipart/form-data">
+		<div class="form-group">
+        <label for="name"> Patient Name:</label>
+        <input type="text" class="form-control" id="patientName" name="patientName" th:field="*{patientName}" required>
+		</div>
+		<div class="form-group">
+        <label for="age">Age:</label>
+        <input type="number" class="form-control" id="age" name="age" th:field="*{age}" required>
+		</div>
+		<div class="form-group">
+        <label for="address">Address:</label>
+        <input type="text" class="form-control" id="address" name="address" th:field="*{address}" required>
+		</div>
+		
+		<div class="form-group">
+        <label for="phoneNumber">Phone Number:</label>
+        <input type="tel" class="form-control" id="phoneNumber" name="phoneNumber" th:field="*{phoneNumber}" required>
+		</div>
+		
+		<div class="form-group">
+                <label for="testName">Select Test:</label>
+                <select class="form-control" id="testName" name="testName" th:field="*{testName}" required>
+                    <option th:each="test : ${tests}" th:value="${test}" th:text="${test}"></option>
+                </select>
+            </div>	
+		<!--
+  			 <div class="form-group">
+                <label for="testName">Select Test:</label>
+                <select class="wpcf7-form-control wpcf7-select wpcf7-validates-as-required form-control" aria-required="true" aria-invalid="false" name="menu-394">
+                 <option value="">What are you looking for?*</option>
+				<option value="PET Scan">PET Scan</option>
+				<option value="MRI">MRI</option>
+				<option value="CT Scan">CT Scan</option>
+				<option value="2D Echo">2D Echo</option>
+				<option value="ECG">ECG</option>
+				<option value="Stress Test">Stress Test</option>
+				<option value="Sonography">Sonography</option>
+				<option value="Color Doppler">Color Doppler</option>
+				<option value="Mammograghy">Mammograghy</option>
+				<option value="OPG X-ray">OPG X-ray</option>
+				<option value="Routine X-ray">Routine X-ray</option>
+				<option value="Blood test">Blood test</option>
+                </select>
+            </div>
+            -->
+            
+  		<div class="form-group">	
+        <label for="file">Upload Prescription Image:</label>
+        <input method="post" type="file" class="form-control-file" id="file" name="file" accept="image/*" required>
+  		</div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+	</div>
+</body>
+</html> 
